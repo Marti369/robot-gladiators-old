@@ -22,7 +22,7 @@ var enemyAttack = 12;
 var fight = function(enemyName) {
     // Alert users that they are starting the round
     window.alert("Welcome to Robot Gladiators!");
-    while (enemyHealth > 0) {
+    while (enemyHealth > 0 && playerHealth > 0) {
 
         //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
         // if player choses to fight, then fight
@@ -36,8 +36,10 @@ var fight = function(enemyName) {
             // check enemy's health
             if (enemyHealth <= 0) {
                 window.alert(enemyName + " has died!");
+                break;
             } else {
                 window.alert(enemyName + " still has " + enemyHealth + " health left.");
+
             }
 
             // remove player's health by subtracting the amount set in the enemyAttack variable
@@ -49,6 +51,7 @@ var fight = function(enemyName) {
             // check player's health
             if (playerHealth <= 0) {
                 window.alert(playerName + " has died!");
+                break;
             } else {
                 window.alert(playerName + " still has " + playerHealth + " health left.");
             }
@@ -61,16 +64,18 @@ var fight = function(enemyName) {
             if (confirmSkip) {
                 window.alert(playerName + " has decided to skip this fight. Goodbye!");
                 // subtract money from playerMoney for skipping
-                playerMoney = playerMoney - 2;
-            }
-
-            // if no (false), ask question again by running fight() again
-            else {
-                fight();
+                playerMoney = playerMoney - 10;
+                console.log("playerMoney", playerMoney);
+                break;
             }
         }
+        // if no (false), ask question again by running fight() again
+        else
+            fight();
+
     }
 }
+
 for (var i = 0; i < enemyNames.length; i++) {
     var pickedEnemyName = enemyNames[i];
     enemyHealth = 50;
